@@ -21,10 +21,10 @@ pipeline {
         stage("Deploy on Test"){
             steps{
                 // deploy on container -> plugin
-                deploy adapters: [tomcat9(credentialsId: 'tomcatserver', path: '', url: 'http://192.168.50.20:8080')], contextPath: '/app', war: '**/*.war'
-              
-            }
-            
+                sshagent(['deploy_user']) {
+                    deploy adapters: [tomcat9(credentialsId: 'tomcatserver', path: '', url: 'http://192.168.50.20:8080')], contextPath: '/app', war: '**/*.war'
+                }
+            }  
         }
     }
     post{
