@@ -34,7 +34,7 @@ pipeline {
         }
         failure{
             echo "========pipeline execution failed========"
-            emailext body: 'test...!!!!!!!!!!', subject: 'pipeline faield', to: 'rahultiple@lve.com'
+            emailext body: 'test...!!!!!!!!!!', subject: 'pipeline faield', to: 'rahultiple1@gmail.con'
         }
     }
 }
