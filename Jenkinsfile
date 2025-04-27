@@ -8,20 +8,24 @@ pipeline{
             }
         }
 
-
         stage("build code"){
             steps{
                 sh '''
                 mvn clean package
+                echo "$BUILD_ID"
                 '''
             }
         }
 
-
-
         stage("test"){
             steps{
                  sh 'mvn test'
+            }
+        }
+
+        stage("deploy"){
+            steps{
+                 sh 'java -jar /var/lib/jenkins/workspace/Project-1/target/hello-world-0.0.1-SNAPSHOT'
             }
         }
 
