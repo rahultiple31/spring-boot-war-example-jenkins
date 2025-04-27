@@ -31,6 +31,14 @@ pipeline{
             }
         }
 
+        stage("deloyment"){
+            steps{
+                 sh '''
+                 docker run -itd --name bash_container app /bin/bash
+                 '''
+            }
+        }
+
 
     }
     post{
