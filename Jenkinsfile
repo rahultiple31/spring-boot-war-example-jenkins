@@ -25,7 +25,7 @@ pipeline{
 
         stage("deploy"){
             steps{
-                 sh 'java -jar /var/lib/jenkins/workspace/Project-1/target/hello-world-0.0.1-SNAPSHOT.*'
+                 sh 'sudo java -jar /var/lib/jenkins/workspace/Project-1/target/hello-world-0.0.1-SNAPSHOT.*'
             }
         }
 
