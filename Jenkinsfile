@@ -23,11 +23,10 @@ pipeline{
             }
         }
 
-        stage("deploy"){
+        stage("build docket images"){
             steps{
                  sh '''
-                 sudo chmod +x /var/lib/jenkins/workspace/Project-1/target/hello-world-0.0.1-SNAPSHOT.war
-                 sudo java -jar /var/lib/jenkins/workspace/Project-1/target/hello-world-0.0.1-SNAPSHOT.war
+                 docker build -t app .
                  '''
             }
         }
