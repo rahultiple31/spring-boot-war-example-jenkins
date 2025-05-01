@@ -26,6 +26,7 @@ pipeline{
         stage("build docket images"){
             steps{
                  sh '''
+                 docker rmi app
                  docker build -t app .
                  '''
             }
