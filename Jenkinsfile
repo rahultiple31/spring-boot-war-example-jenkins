@@ -35,6 +35,7 @@ pipeline{
         stage("deloyment"){
             steps{
                  sh '''
+                 docker rm -f bash_container
                  docker run -itd --name bash_container app /bin/bash
                  '''
             }
