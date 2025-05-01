@@ -3,6 +3,8 @@ pipeline{
 
     environment{
         STAGE="PROD"
+        USER="DEV"
+        PASS=credentials('PASS')
     }
 
     stages{
@@ -16,6 +18,8 @@ pipeline{
             steps{
                 sh '''
                 echo "$STAGE"
+                echo "uaername $USER and password $PASS"
+
                 '''
             }
         }
