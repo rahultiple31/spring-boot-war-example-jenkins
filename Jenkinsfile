@@ -12,12 +12,19 @@ pipeline{
             }
         }
 
+        stage("environment"){
+            steps{
+                sh '''
+                echo "$STAGE"
+                '''
+            }
+        }
+
         stage("build code"){
             steps{
                 sh '''
                 mvn clean package
                 echo "$BUILD_ID"
-                echo "$PROD"
                 '''
             }
         }
