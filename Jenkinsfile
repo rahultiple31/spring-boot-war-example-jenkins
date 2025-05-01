@@ -49,7 +49,6 @@ pipeline{
             steps{
                  sh '''
                  docker rmi -f app:latest
-                 docker rmi rahultipledocker/nov-aap:latest
                  docker build -t app .
                  '''
             }
@@ -64,9 +63,23 @@ pipeline{
                  sh '''
                  docker tag app rahultipledocker/nov-aap:latest
                  docker push rahultipledocker/nov-aap:latest
+                 docker rmi rahultipledocker/nov-aap:latest
                  docker logout
-                 '''
+                 '''                 
+            }
+        }
+
+        stage("pull docker image and deploy on local machine"){
+            steps{
                  
+                 withCredentials([string(credentialsId: 'docker_hub', variable: 'docker_hub')]) {
+                 sh 'docker login -u rahultipledocker -p ${docker_hub}' 
+                }
+                 sh '''
+                 docker pull rahultipledocker/nov-aap:latest
+                 docker run -itd --name web-app rahultipledocker/nov-aap:latest /bin/bash
+                 docker logout
+                 '''                 
             }
         }
 
