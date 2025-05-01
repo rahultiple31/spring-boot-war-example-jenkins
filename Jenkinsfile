@@ -1,6 +1,10 @@
 pipeline{
     agent any
 
+    environment{
+        STAGE="PROD"
+    }
+
     stages{
         stage('Git checkout code') {
             steps {
@@ -13,6 +17,7 @@ pipeline{
                 sh '''
                 mvn clean package
                 echo "$BUILD_ID"
+                echo "$PROD"
                 '''
             }
         }
