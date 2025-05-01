@@ -49,6 +49,7 @@ pipeline{
             steps{
                  sh '''
                  docker rmi -f app:latest
+                 docker rmi rahultipledocker/nov-aap:latest
                  docker build -t app .
                  '''
             }
@@ -56,10 +57,16 @@ pipeline{
 
         stage("docker push"){
             steps{
+                 
+                 withCredentials([string(credentialsId: 'docker_hub', variable: 'docker_hub')]) {
+                 sh 'docker login -u rahultipledocker -p ${docker_hub}' 
+                }
                  sh '''
                  docker tag app rahultipledocker/nov-aap:latest
                  docker push rahultipledocker/nov-aap:latest
+                 docker logout
                  '''
+                 
             }
         }
 
